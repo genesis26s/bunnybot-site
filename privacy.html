@@ -3,42 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — Quadton Bot</title>
+    <title>Privacy Policy — Quadton-Bot</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#facc15',
+                            gold: '#eab308',
+                            dark: '#08080a',
+                            card: 'rgba(255, 255, 255, 0.02)',
+                            border: 'rgba(250, 204, 21, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #08080a;
             color: #ffffff;
+            overflow-x: hidden;
+        }
+        .privacy-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .privacy-card:hover {
+            border-color: rgba(250, 204, 21, 0.3);
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="py-12 px-6">
-    <div class="max-w-3xl mx-auto space-y-8">
-        <a href="index.html" class="text-sm font-semibold text-yellow-400 hover:underline">← Return to Quadton Bot Home</a>
+<body class="min-h-screen flex flex-col justify-between py-12 px-6">
+    <div class="max-w-4xl mx-auto w-full space-y-10">
+        <!-- Navigation Header -->
+        <div class="flex items-center justify-between border-b border-white/10 pb-6">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="https://cdn.discordapp.com/attachments/1532553946709753986/1534027038284054658/62D5FCF3-29F4-451F-AAC7-ACA42845C965.png?ex=6a72a182&is=6a715002&hm=565ca4178ef14c467f5e6c935944885f0f494f46aa1740f6af147be90b8f6f34&" alt="Quadton Logo" class="w-8 h-8 rounded-full border border-yellow-400/40">
+                <span class="text-xl font-extrabold text-white">Quadton-<span class="text-yellow-400">Bot</span></span>
+            </a>
+            <a href="index.html" class="text-sm font-semibold text-yellow-400 hover:underline flex items-center gap-1">
+                ← Return Home
+            </a>
+        </div>
         
-        <div class="space-y-2">
-            <h1 class="text-4xl font-extrabold text-white">Privacy Policy</h1>
+        <!-- Page Title Header -->
+        <div class="space-y-2 text-center sm:text-left">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
             <p class="text-xs font-semibold text-yellow-400 uppercase tracking-widest">Last Updated: August 2026</p>
         </div>
 
-        <div class="space-y-6 text-sm text-slate-300 leading-relaxed divide-y divide-white/10">
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">1. Information We Store</h2>
-                <p>Quadton Bot stores essential identifiers required for economy functionality, including Discord User IDs, Usernames, Wallet/Bank balances, Inventory items, and Level progression stats.</p>
-            </section>
+        <!-- 12 Privacy Policy Cards Grid -->
+        <div class="space-y-4">
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">1. Introduction</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">This Privacy Policy explains how Quadton-Bot handles data.</p>
+            </div>
 
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">2. Data Usage & Security</h2>
-                <p>Stored data is exclusively used to maintain Quad-Coins balances, inventories, and career progression. We do not sell or transfer user data to third parties.</p>
-            </section>
+            <div class="privacy-card p-6 rounded-2xl space-y-3">
+                <h2 class="text-base font-bold text-yellow-400">2. Data Collected</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We may store:</p>
+                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1.5 pl-2">
+                    <li>User IDs</li>
+                    <li>Server IDs</li>
+                    <li>Channel IDs</li>
+                    <li>Role IDs</li>
+                    <li>Message IDs (limited use)</li>
+                    <li>Economy data (balances, items)</li>
+                    <li>Server settings</li>
+                    <li>Moderation logs</li>
+                </ul>
+            </div>
 
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">3. Data Deletion Requests</h2>
-                <p>Users may request complete account data deletion by executing resetting commands or contacting server support administrators.</p>
-            </section>
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">3. Data Usage</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Data is used for Quadton-Bot functionality, economy systems, moderation tools, and server configuration.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">4. Storage</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Data is stored in secure databases or hosting systems.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">5. Sharing</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We do not sell data. Data is only shared if required by law or for security.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">6. Third-Party Services</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We may use third-party services and are not responsible for their failures.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">7. Retention</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Data is stored as long as needed for functionality. Some data may remain in backups.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">8. Removal</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Server owners may request data deletion, but backups may persist temporarily.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">9. Security</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We take reasonable precautions but cannot guarantee full security.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">10. Age Requirement</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Users must follow Discord’s age requirements.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">11. Changes</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">This Privacy Policy may change at any time without prior notice.</p>
+            </div>
+
+            <div class="privacy-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">12. Contact</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Contact the official Quadton-Bot support server for privacy requests or questions.</p>
+            </div>
         </div>
+        
+        <footer class="pt-8 border-t border-white/10 text-center text-xs text-slate-500">
+            © 2026 Quadton-Bot. All rights reserved.
+        </footer>
     </div>
 </body>
 </html>
