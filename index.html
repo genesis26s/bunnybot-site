@@ -1,331 +1,210 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bunny Bot — Fast, Lightweight Discord Economy System</title>
+    <title>Quadton Bot — Discord Economy, Market & Career Engine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#facc15',
+                            gold: '#eab308',
+                            light: '#fef08a',
+                            dark: '#08080a',
+                            card: 'rgba(255, 255, 255, 0.03)',
+                            glass: 'rgba(255, 255, 255, 0.05)',
+                            border: 'rgba(250, 204, 21, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-color: #0b0b0f;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.05);
-            --card-hover-border: rgba(200, 182, 255, 0.2);
-            --accent-color: #c8b6ff;
-            --accent-glow: rgba(200, 182, 255, 0.15);
-            --text-main: #f1f1f4;
-            --text-muted: #8a8aa3;
-            --radius-btn: 12px;
-            --radius-card: 16px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #08080a;
+            color: #ffffff;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Ambient Hero Glow Grid */
-        body::before {
-            content: '';
+        /* White & Yellow Mesh Animated Background */
+        .mesh-bg {
             position: absolute;
-            top: -200px;
-            right: -100px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(200, 182, 255, 0.08) 0%, rgba(11, 11, 15, 0) 70%);
-            z-index: -1;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1200px;
+            height: 700px;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(250, 204, 21, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+            filter: blur(100px);
+            animation: meshFloat 12s ease-in-out infinite alternate;
             pointer-events: none;
+            z-index: 0;
         }
 
-        header {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        @keyframes meshFloat {
+            0% { transform: translateX(-50%) translateY(0px) scale(1); }
+            50% { transform: translateX(-48%) translateY(30px) scale(1.08); }
+            100% { transform: translateX(-52%) translateY(-20px) scale(0.95); }
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #fff;
-            letter-spacing: -0.5px;
+        /* Liquid Glass Interactive Tabs Effect */
+        .glass-tab {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .logo img {
-            border-radius: 50%;
+        .glass-tab:hover, .glass-tab.active {
+            background: rgba(250, 204, 21, 0.08);
+            border-color: rgba(250, 204, 21, 0.4);
+            box-shadow: 0 12px 40px 0 rgba(234, 179, 8, 0.25);
+            transform: translateY(-4px);
         }
 
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-left: 24px;
-            transition: color 0.2s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .hero {
-            max-width: 800px;
-            margin: 80px auto 100px auto;
-            text-align: center;
-            padding: 0 24px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(200, 182, 255, 0.05);
-            border: 1px solid rgba(200, 182, 255, 0.15);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--accent-color);
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1.5px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        h1 span {
-            background: linear-gradient(135deg, #fff 30%, var(--accent-color) 100%);
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 20%, #facc15 80%, #eab308 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 36px auto;
+        .btn-yellow {
+            background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+            color: #000;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(234, 179, 8, 0.3);
         }
 
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 28px;
-            border-radius: var(--radius-btn);
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .btn-invite {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 4px 24px var(--accent-glow);
-        }
-
-        .btn-invite:hover {
+        .btn-yellow:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(200, 182, 255, 0.3);
-        }
-
-        .btn-support {
-            background-color: rgba(255, 255, 255, 0.02);
-            color: #fff;
-            border: 1px solid var(--card-border);
-        }
-
-        .btn-support:hover {
-            transform: translateY(-2px);
-            background-color: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .features-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px 120px 24px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-card);
-            padding: 32px;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--card-hover-border);
-        }
-
-        .card-icon {
-            font-size: 1.75rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        footer {
-            border-top: 1px solid var(--card-border);
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            header, .footer-content { flex-direction: column; text-align: center; }
-            nav { margin-top: 15px; }
-            nav a { margin: 0 10px; }
-            .footer-links { margin-top: 10px; }
-            .footer-links a { margin: 0 10px; }
+            box-shadow: 0 8px 30px rgba(250, 204, 21, 0.5);
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen flex flex-col justify-between">
 
-    <header>
-        <div class="logo">
-            <img src="image.png" alt="Bunny Bot" width="32" height="32" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='inline'">
-            <span id="fallback-icon" style="display: none;">🐰</span> Bunny Bot
+    <!-- Animated Mesh Glow -->
+    <div class="mesh-bg"></div>
+
+    <!-- Header Navigation -->
+    <header class="relative z-30 border-b border-white/10 bg-black/30 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="https://cdn.discordapp.com/attachments/1532553946709753986/1534027038284054658/62D5FCF3-29F4-451F-AAC7-ACA42845C965.png?ex=6a72a182&is=6a715002&hm=565ca4178ef14c467f5e6c935944885f0f494f46aa1740f6af147be90b8f6f34&" alt="Quadton Logo" class="w-10 h-10 rounded-full border border-yellow-400/40 shadow-lg">
+                <span class="text-xl font-extrabold tracking-tight text-white">Quadton <span class="text-yellow-400">Bot</span></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#features" class="hover:text-yellow-400 transition-colors">Features</a>
+                <a href="status.html" class="hover:text-yellow-400 transition-colors">Monitoring Status</a>
+                <a href="terms.html" class="hover:text-yellow-400 transition-colors">Terms & Policy</a>
+                <a href="privacy.html" class="hover:text-yellow-400 transition-colors">Privacy Policy</a>
+            </nav>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1476206097663787238&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-yellow px-5 py-2.5 rounded-xl text-sm">Add to Discord</a>
         </div>
-        <nav>
-            <a href="#features">Features</a>
-            <a href="status.html">Status</a>
-            <a href="terms.html">Terms & Policy</a>
-            <a href="privacy.html">Privacy Policy</a>
-        </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="badge">Fast • Lightweight • Economy System</div>
-            <h1>The New Generation of <br>Discord <span>Economy</span></h1>
-            <p class="subtitle">A smooth, production-ready simulation economy built to drive active engagement and trading on your Discord community server.</p>
-            <div class="cta-buttons">
-                <a href="https://discord.com/api/oauth2/authorize?client_id=1476206097663787238&permissions=8&scope=bot%20applications.commands" target="_blank" rel="noopener noreferrer" class="btn btn-invite">Invite Bunny Bot</a>
-                <a href="https://discord.gg/sgs5bhPdGa" target="_blank" rel="noopener noreferrer" class="btn btn-support">Support Server</a>
+    <!-- Hero Section -->
+    <main class="relative z-20 max-w-6xl mx-auto px-6 pt-16 pb-20 space-y-16">
+        <section class="text-center space-y-6 max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-400/30 bg-yellow-400/10 text-yellow-300 text-xs font-semibold tracking-wide uppercase">
+                🪙 Powered by Quad-Coins Economy
+            </div>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
+                The Next Generation of <br><span class="text-gradient">Discord Economy</span>
+            </h1>
+            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                A seamless, high-performance Discord ecosystem featuring real estate, stock market exchanges, RPG adventures, and dynamic careers.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1476206097663787238&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-yellow px-8 py-3.5 rounded-xl text-base flex items-center gap-2">
+                    <span>Invite Quadton Bot</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+                <a href="status.html" class="px-8 py-3.5 rounded-xl text-base font-semibold border border-white/20 bg-white/5 hover:bg-white/10 transition-all text-white">View Operations</a>
             </div>
         </section>
 
-        <section class="features-container" id="features">
-            <div class="features-grid">
-                <div class="card">
-                    <div class="card-icon">📈</div>
-                    <h3>Economy System</h3>
-                    <p>A multi-tiered system keeping user engagement high via detailed item tracking, banking limits, and streamlined configuration logic.</p>
+        <!-- Banner Display Frame -->
+        <div class="relative max-w-5xl mx-auto rounded-2xl overflow-hidden border border-yellow-400/30 shadow-2xl shadow-yellow-500/10">
+            <img src="https://cdn.discordapp.com/attachments/1532553946709753986/1534027068273197257/IMG_7910.png?ex=6a72a189&is=6a715009&hm=1384a05b52ecbd263472f5eb135d5be292dba24b6eaeb2d9ca04e555f58681dd&" alt="Quadton Banner" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- Interactive Liquid Glass Features Grid -->
+        <section id="features" class="space-y-8">
+            <div class="text-center space-y-2">
+                <h2 class="text-3xl font-extrabold text-white">Interactive Subsystem Modules</h2>
+                <p class="text-slate-400 text-sm">Explore Quadton Bot's core features below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Economy Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">🪙</div>
+                    <h3 class="text-xl font-bold text-white">Quad-Coins Economy</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Deposit, withdraw, and transfer Quad-Coins with SQLite WAL mode transaction protections.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🛍️</div>
-                    <h3>Shop System</h3>
-                    <p>Static server shops coupled with structural marketplace capabilities for fluid configuration, scaling, and item utility options.</p>
+
+                <!-- Careers & Jobs Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">💼</div>
+                    <h3 class="text-xl font-bold text-white">Career & Job Shifts</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Apply for professional positions, earn rank promotions, and complete specialized work shifts.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🎲</div>
-                    <h3>Gambling Features</h3>
-                    <p>Clean interactive environments hosting balanced games of chance designed mathematically around secure default win modifiers.</p>
+
+                <!-- Stock Market Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">📈</div>
+                    <h3 class="text-xl font-bold text-white">Dynamic Stock Exchange</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Invest in demand-driven commodities and trade stock portfolios on a fluctuating open market.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🏆</div>
-                    <h3>Leaderboards</h3>
-                    <p>Showcase top server performers dynamically, highlighting individual wealth accumulations, active progression metrics, and rankings.</p>
+
+                <!-- Real Estate Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">🏰</div>
+                    <h3 class="text-xl font-bold text-white">Real Estate & Yields</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Acquire apartments, mansions, and skyscrapers to collect automated hourly rental yields.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">💼</div>
-                    <h3>Daily & Work Income</h3>
-                    <p>Keep your user retention sticky using continuous streaks, scaling multiplier updates, and balanced professional career cooldown loops.</p>
+
+                <!-- RPG Adventure Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">⚔️</div>
+                    <h3 class="text-xl font-bold text-white">RPG Dungeons & Raids</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Fight dungeon monsters, complete quests, craft materials, and gain level XP rewards.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <h3>Lightweight Performance</h3>
-                    <p>Engineered accurately with clean async pathways and minimal overhead for smooth operations beneath heavy server environments.</p>
+
+                <!-- Leaderboards Module -->
+                <div class="glass-tab p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-2xl">🏆</div>
+                    <h3 class="text-xl font-bold text-white">Rankings & Prestige</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Compete on global wealth, level, and daily streak rankings with prestige multipliers.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div>© 2026 Bunny Bot. All rights reserved.</div>
-            <div class="footer-links">
-                <a href="status.html">Status</a>
-                <a href="terms.html">Terms & Policy</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="https://discord.gg/vSfGaZVpS6" target="_blank" rel="noopener noreferrer">Support Server</a>
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-white/10 bg-black/40 py-8">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div>© 2026 Quadton Bot. All rights reserved.</div>
+            <div class="flex items-center gap-6">
+                <a href="status.html" class="hover:text-yellow-400 transition-colors">Monitoring Status</a>
+                <a href="terms.html" class="hover:text-yellow-400 transition-colors">Terms & Policy</a>
+                <a href="privacy.html" class="hover:text-yellow-400 transition-colors">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -333,4 +212,3 @@
 </body>
 </html>
 
-```
