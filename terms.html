@@ -3,47 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service — Quadton Bot</title>
+    <title>Terms of Service — Quadton-Bot</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#facc15',
+                            gold: '#eab308',
+                            dark: '#08080a',
+                            card: 'rgba(255, 255, 255, 0.02)',
+                            border: 'rgba(250, 204, 21, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #08080a;
             color: #ffffff;
+            overflow-x: hidden;
+        }
+        .terms-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .terms-card:hover {
+            border-color: rgba(250, 204, 21, 0.3);
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="py-12 px-6">
-    <div class="max-w-3xl mx-auto space-y-8">
-        <a href="index.html" class="text-sm font-semibold text-yellow-400 hover:underline">← Return to Quadton Bot Home</a>
+<body class="min-h-screen flex flex-col justify-between py-12 px-6">
+    <div class="max-w-4xl mx-auto w-full space-y-10">
+        <!-- Navigation Header -->
+        <div class="flex items-center justify-between border-b border-white/10 pb-6">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="https://cdn.discordapp.com/attachments/1532553946709753986/1534027038284054658/62D5FCF3-29F4-451F-AAC7-ACA42845C965.png?ex=6a72a182&is=6a715002&hm=565ca4178ef14c467f5e6c935944885f0f494f46aa1740f6af147be90b8f6f34&" alt="Quadton Logo" class="w-8 h-8 rounded-full border border-yellow-400/40">
+                <span class="text-xl font-extrabold text-white">Quadton-<span class="text-yellow-400">Bot</span></span>
+            </a>
+            <a href="index.html" class="text-sm font-semibold text-yellow-400 hover:underline flex items-center gap-1">
+                ← Return Home
+            </a>
+        </div>
         
-        <div class="space-y-2">
-            <h1 class="text-4xl font-extrabold text-white">Terms of Service</h1>
+        <!-- Page Title Header -->
+        <div class="space-y-2 text-center sm:text-left">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Terms & Policy</h1>
             <p class="text-xs font-semibold text-yellow-400 uppercase tracking-widest">Last Updated: August 2026</p>
         </div>
 
-        <div class="space-y-6 text-sm text-slate-300 leading-relaxed divide-y divide-white/10">
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">1. Acceptance of Terms</h2>
-                <p>By executing commands or interacting with Quadton Bot, you explicitly agree to these Terms of Service. If you do not agree, you must remove Quadton Bot from your server.</p>
-            </section>
+        <!-- 22 Terms & Policy Cards Grid -->
+        <div class="space-y-4">
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">1. Acceptance of Terms</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">By using Quadton-Bot, you agree to these Terms & Policy. If you do not agree, you must remove the bot from your server.</p>
+            </div>
 
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">2. Quad-Coins Virtual Currency Disclaimer</h2>
-                <p>Quad-Coins (QC 🪙) are purely virtual points designed for in-game Discord entertainment. Quad-Coins possess no real-world monetary value and cannot be exchanged or redeemed for fiat currency.</p>
-            </section>
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">2. Service Availability</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Quadton-Bot is provided “as is” and “as available” without guarantees of uptime, stability, or uninterrupted service.</p>
+            </div>
 
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">3. Fair Use & Abuse Restrictions</h2>
-                <p>Users are strictly prohibited from exploiting software bugs, automating interactions, or using unauthorized scripts to accumulate Quad-Coins or manipulate rankings.</p>
-            </section>
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">3. Feature Changes</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Features, commands, systems, economy data, or services may be modified, reset, or removed at any time without notice.</p>
+            </div>
 
-            <section class="pt-4 space-y-2">
-                <h2 class="text-lg font-bold text-white">4. Service Availability & Modifications</h2>
-                <p>Quadton Bot is provided "as is". Features, databases, or balances may be updated, reset, or modified at any time to preserve system balance.</p>
-            </section>
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">4. No Warranty</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We do not guarantee accuracy, reliability, security, or performance of Quadton-Bot.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">5. Limitation of Liability</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We are not responsible for any damages, data loss, server issues, moderation mistakes, or losses caused by Quadton-Bot.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">6. Data Loss</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Data (including economy, settings, logs) may be lost, reset, or modified at any time.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">7. Moderation Responsibility</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Server owners are fully responsible for how Quadton-Bot is configured and used.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">8. Permissions</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">You are responsible for granting Quadton-Bot permissions. Misconfiguration is your responsibility.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">9. Abuse</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Exploiting bugs, abusing systems, or bypassing restrictions is not allowed.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">10. Malicious Use</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Quadton-Bot may not be used for spam, scams, harassment, raids, or illegal activities.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">11. Reverse Engineering</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">You may not reverse engineer or redistribute protected parts of Quadton-Bot without permission.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">12. Third-Party Services</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We are not responsible for third-party service failures or outages.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">13. Security</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We cannot guarantee full protection against exploits or unauthorized access.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">14. Economy Disclaimer</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">All currency/items have no real-world value.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">15. Rate Limits</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We may apply limits or restrictions at any time.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">16. Blacklisting</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">We can restrict or blacklist servers/users for abuse or security reasons.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">17. User Responsibility</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">You must follow Discord’s Terms of Service and applicable laws.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">18. Updates</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">These Terms may change at any time without notice.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">19. No Affiliation</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Quadton-Bot is not affiliated with Discord Inc.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">20. Agreement</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Using Quadton-Bot means you agree to all terms above.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">21. Open Source & Credit</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">Quadton-Bot is open-source. You may modify or use parts of it, but credit must be given to Quadton-Bot. Claiming full ownership of original work without credit is not allowed.</p>
+            </div>
+
+            <div class="terms-card p-6 rounded-2xl space-y-2">
+                <h2 class="text-base font-bold text-yellow-400">22. Community Focus</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">This project is maintained by a single developer and built with a user-first mindset focused on simplicity and community experience.</p>
+            </div>
         </div>
+        
+        <footer class="pt-8 border-t border-white/10 text-center text-xs text-slate-500">
+            © 2026 Quadton-Bot. All rights reserved.
+        </footer>
     </div>
 </body>
 </html>
